@@ -1,0 +1,5 @@
+---
+# vars file for edge_application
+_edge_application_ports: "{{ edge_application_external_port }}:{{ edge_application_internal_port }}"
+_edge_application_systemd_path: /etc/systemd/system
+_edge_application_systemd_unit_name: "{{ edge_application_container_prefix }}-{{ edge_application_name }}"

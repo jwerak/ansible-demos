@@ -1,0 +1,16 @@
+---
+- name: Create systemd service unit for application
+  containers.podman.podman_container:
+    name: "{{ edge_application_name }}"
+    image: "{{ edge_application_image }}"
+    ports: "{{ _edge_application_ports }}"
+    recreate: true
+    generate_systemd:
+      new: true
+      path: "{{ _edge_application_systemd_path }}"
+      restart_policy: on-failure
+    state: present
+    rm: true
+  notify:
+    - Reload systemd daemon
+    - Restart systemd unit

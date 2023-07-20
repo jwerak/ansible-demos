@@ -1,0 +1,7 @@
+---
+# defaults file for edge_application
+edge_application_image: registry.access.redhat.com/ubi9/httpd-24
+edge_application_name: edge-application
+edge_application_external_port: 8080
+edge_application_internal_port: 8080
+edge_application_container_prefix: container

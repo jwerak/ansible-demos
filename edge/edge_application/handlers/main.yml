@@ -1,0 +1,11 @@
+---
+# handlers file for edge_application
+
+- name: Reload systemd daemon
+  ansible.builtin.systemd:
+    daemon_reload: true
+
+- name: Restart systemd unit
+  ansible.builtin.systemd:
+    name: "{{ _edge_application_systemd_unit_name }}"
+    state: restarted
