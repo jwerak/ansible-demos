@@ -1,0 +1,10 @@
+---
+- name: Deploy container to Edge Server
+  hosts: all
+  become: true
+  gather_facts: false
+  tasks:
+    - name: Import role to deploy Edge Application
+      ansible.builtin.import_role:
+        name: edge_application
+        tasks_from: setup.yml

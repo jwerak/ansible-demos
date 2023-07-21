@@ -1,9 +1,4 @@
 ---
-- name: Install podman package
-  ansible.builtin.package:
-    name: podman
-    state: present
-
 - name: Create systemd service unit for application
   containers.podman.podman_container:
     name: "{{ edge_application_name }}"
@@ -19,3 +14,7 @@
   notify:
     - Reload systemd daemon
     - Restart systemd unit
+
+- name: Show where application is listening
+  ansible.builtin.debug:
+    msg: "Application listening on: {{ ansible_host }}:{{ edge_application_external_port }}"
