@@ -1,16 +1,9 @@
 ---
-- name: Create systemd service unit for application
-  containers.podman.podman_container:
-    name: "{{ edge_application_name }}"
-    image: "{{ edge_application_image }}"
-    ports: "{{ _edge_application_ports }}"
-    recreate: true
-    generate_systemd:
-      new: true
-      path: "{{ _edge_application_systemd_path }}"
-      restart_policy: on-failure
-    state: present
-    rm: true
+- name: Create systemd unit file from template
+  ansible.builtin.template:
+    src: container.service.j2
+    dest: "{{ _edge_application_systemd_path }}/{{ _edge_application_systemd_unit_name }}"
+    mode: "0644"
   notify:
     - Reload systemd daemon
     - Restart systemd unit
